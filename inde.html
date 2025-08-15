@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>In Loving Memory</title>
+
+ 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Playfair+Display:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0f1014;
+      --bg-soft: #15161c;
+      --card: rgba(255,255,255,.06);
+      --text: #f4f4f6;
+      --muted: #cfd2da;
+      --accent: #d6b77b; /* warm gold */
+      --accent-2:#7fb1c9; /* gentle blue */
+      --shadow: 0 15px 45px rgba(0,0,0,.35);
+      --radius: 22px;
+    }
+
+   
+    *,*::before,*::after{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: 'EB Garamond', ui-serif, Georgia, serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% -10%, rgba(214,183,123,.08), transparent 60%),
+        radial-gradient(900px 600px at 110% 20%, rgba(127,177,201,.10), transparent 60%),
+        linear-gradient(180deg, #0b0c10, var(--bg));
+      background-attachment: fixed;
+      line-height:1.6;
+      overflow-x: hidden;
+    }
+
+    .container{
+      max-width:1050px;
+      margin-inline:auto;
+      padding: clamp(18px, 3vw, 36px);
+    }
+
+    header.hero{
+      position:relative;
+      text-align:center;
+      padding: clamp(32px, 6vw, 72px) 12px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      isolation:isolate;
+      animation: fadeIn 2s ease-in-out;
+    }
+    header.hero::after{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(600px 200px at 50% -10%, rgba(214,183,123,.25), transparent 60%);
+      z-index:-1; filter: blur(25px);
+    }
+
+    .name{
+      font-family: 'Playfair Display', serif;
+      letter-spacing:.4px;
+      font-size: clamp(32px, 5.6vw, 60px);
+      margin:0 0 6px;
+      animation: slideInUp 1.5s ease-out;
+    }
+    .tagline{
+      margin: 4px 0 14px;
+      font-style: italic;
+      color: var(--muted);
+      font-size: clamp(16px, 2.5vw, 20px);
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out forwards;
+      animation-delay: 0.6s;
+    }
+    .dates{
+      display:inline-block;
+      padding:6px 14px;
+      border:1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      color: var(--muted);
+      backdrop-filter: blur(6px);
+    }
+
+    .divider{ height:1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent); margin: 32px 0; }
+
+    .about{
+      display:grid; gap: clamp(16px, 3vw, 28px);
+      grid-template-columns: 1fr 1.2fr;
+      align-items:center;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .portrait{
+      border-radius: var(--radius);
+      overflow:hidden;
+      aspect-ratio: 3/4;
+      min-height:320px;
+      background: #0d0e12;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease-in-out;
+    }
+    .portrait img{ width:100%; height:100%; object-fit:cover; display:block; filter: saturate(.9) contrast(1.02); }
+    .portrait:hover{
+      transform: scale(1.05);
+    }
+
+    .about .content{
+      background: var(--card);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      padding: clamp(16px, 3vw, 28px);
+      box-shadow: var(--shadow);
+    }
+    .script{ font-family: 'Great Vibes', cursive; color: var(--accent); font-size: clamp(20px, 3.2vw, 28px); letter-spacing:.4px; }
+
+    .quote{
+      margin: 8px 0 0;
+      font-size: clamp(18px, 2.3vw, 22px);
+      font-weight: 300;
+    }
+    blockquote{
+      margin:0; padding: 0 0 0 18px; border-left: 2px solid rgba(214,183,123,.5);
+      color: var(--muted);
+    }
+
+    /* Gallery */
+    .gallery{
+      --size: 250px;
+      display:grid; gap:18px; grid-template-columns: repeat(auto-fill, minmax(var(--size),1fr));
+    }
+    .photo{
+      position:relative; overflow:hidden; border-radius:18px; background:#0b0c10;
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+    }
+    .photo img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .7s ease; filter: grayscale(8%) saturate(.9) contrast(1.03); }
+    .photo:hover img{ transform: scale(1.03); }
+    .photo .cap{
+      position:absolute; inset:auto 0 0 0; padding:12px 14px; font-size:14px; color:#e9ebf1;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,.55));
+    }
+
+    /* Candle row */
+    .candles{
+      display:flex; gap:18px; justify-content:center; align-items:end; padding: 12px 0 4px;
+    }
+    .candle{ width:10px; height:44px; background: linear-gradient(#ffe7b3, #e0b56d); border-radius:6px; position:relative; box-shadow: inset 0 -6px 10px rgba(0,0,0,.28), 0 6px 16px rgba(0,0,0,.35); }
+    .candle::before{ content:''; position:absolute; top:-18px; left:50%; transform: translateX(-50%);
+      width: 16px; height:24px; border-radius: 50% 50% 40% 40%;
+      background: radial-gradient(40% 50% at 40% 40%, #fff7d7, #ffd16e 60%, rgba(0,0,0,0) 65%);
+      filter: blur(.4px);
+      animation: flicker 2.2s infinite ease-in-out;
+    }
+    @keyframes flicker{ 0%,100%{ transform: translateX(-50%) scale(1); opacity:.95 } 50%{ transform: translateX(-50%) scale(1.08); opacity:.75 } }
+
+ 
+    footer{
+      text-align:center; color: var(--muted); margin-top: 38px; padding: 18px 0 10px;
+    }
+    footer .signature{ font-family:'Great Vibes', cursive; font-size: 28px; color:var(--accent); }
+
+    
+    @media (max-width: 860px){
+      .about{ grid-template-columns: 1fr; }
+    }
+
+   
+    @keyframes fadeIn{
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @keyframes slideInUp{
+      0% { transform: translateY(30px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    
+    .button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+    .button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="hero" role="banner" aria-label="Memorial header">
+      <h1 class="name">In Loving Memory of  <em>D.Johnson</em></h1>
+      <p class="tagline">“What we have once enjoyed and deeply loved we can never lose; for all that we love deeply becomes a part of us.”</p>
+      <span class="dates"> 25 MAR 1965 — 14 AUG 2025</span>
+      <div class="candles" aria-hidden="true" style="margin-top:18px">
+        <div class="candle"></div>
+        <div class="candle" style="height:52px"></div>
+        <div class="candle" style="height:46px"></div>
+      </div>
+    </header>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="about">
+      <div class="portrait">
+        <img src="https://ssbcrackexams.com/wp-content/uploads/2024/03/Military-Strength-Indian-cadets.jpg" alt="Military Portrait">
+      </div>
+      <div class="content">
+        <p class="script">“He served his country with pride, and gave his heart to every soul he touched.”</p>
+      </div>
+    </div>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <footer>
+      <p class="quote">
+        “May the winds of heaven blow softly and whisper in your ear: we love you and we miss you, and wish that you were here.”
+      </p>
+      <div class="signature">— With love, always</div>
+    </footer>
+
+    <h2>Click the button to See our memories</h2>
+
+    <!-- Button that links to the Google Drive image -->
+    <a href="https://drive.google.com/drive/folders/1tljg-vMj2N1q735N_d8ylfe9lnySJfbb" class="button" target="_blank">Click Here</a>
+  </main>
+</body>
+</html>
